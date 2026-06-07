@@ -1,0 +1,6 @@
+{
+  "name": "A to Z Photo Frame Shop",
+  "description": "Premium local e-commerce store for custom photo frames in Vapi, Gujarat, featuring WhatsApp order placement, interactive catalog, and complete secure admin panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,172 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role-based access and loyalty points",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "loyaltyPoints": { "type": "number", "description": "Accrued loyalty points balance" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "A highly customizable photo frame product listing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "sizes": { "type": "array" },
+        "stockStatus": { "type": "string", "enum": ["in_stock", "low_stock", "out_of_stock"] },
+        "featured": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "materials": { "type": "array", "description": "Supported custom materials/wood styles" },
+        "colors": { "type": "array", "description": "Supported frame color borders" },
+        "averageRating": { "type": "number" },
+        "ratingsCount": { "type": "number" }
+      },
+      "required": ["name", "price", "category", "stockStatus"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Category for filtering frame types",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "slug": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string" }
+      },
+      "required": ["name", "slug"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with customization, discount codes and points info",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerAddress": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "processing", "completed", "cancelled"] },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "pointsEarned": { "type": "number" },
+        "pointsRedeemed": { "type": "number" },
+        "couponApplied": { "type": "string" },
+        "discountAmount": { "type": "number" }
+      },
+      "required": ["customerName", "customerPhone", "customerAddress", "items", "totalAmount", "status", "createdAt"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer written review with star rating and moderation status",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "productId": { "type": "string" },
+        "rating": { "type": "number" },
+        "reviewText": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "userId": { "type": "string" },
+        "status": { "type": "string", "enum": ["approved", "pending"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["productId", "rating", "reviewText", "customerName", "status", "createdAt"]
+    },
+    "Coupon": {
+      "title": "Coupon",
+      "description": "Discount coupon code managed by store admins",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "discountType": { "type": "string", "enum": ["fixed", "percent"] },
+        "discountValue": { "type": "number" },
+        "minOrderAmount": { "type": "number" },
+        "expiryDate": { "type": "string" },
+        "isActive": { "type": "boolean" },
+        "usageLimit": { "type": "number" },
+        "usageCount": { "type": "number" }
+      },
+      "required": ["code", "discountType", "discountValue", "isActive", "usageCount"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Contact form inquiry submission",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "message", "createdAt"]
+    },
+    "Banner": {
+      "title": "Banner",
+      "description": "Homepage banner sliding offer listing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subtitle": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "link": { "type": "string" },
+        "isActive": { "type": "boolean" }
+      },
+      "required": ["imageUrl", "isActive"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Store application users and roles"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Database of photo frame products"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Categories for frames"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer frame orders"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Customer product reviews and ratings"
+    },
+    "/coupons/{couponId}": {
+      "schema": "Coupon",
+      "description": "Checkout discount codes"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Contact submissions and feedback"
+    },
+    "/banners/{bannerId}": {
+      "schema": "Banner",
+      "description": "Banner slide entries for home screen"
+    }
+  }
+}
