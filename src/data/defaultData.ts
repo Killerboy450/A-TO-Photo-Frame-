@@ -10,10 +10,10 @@ export const LOCAL_SHOP_INFO = {
   owner: "Hasan Sodawala",
   phone: "+916359495943", // Styled format, authentic and active
   whatsapp: "+916359495943", // Configured directly for Vapi Gujarat order placement
-  address: "Shop No. 4, Ground Floor, Shanti Niketan Complex, Near Char Rasta, Opp. GIDC Bus Depot, GIDC Vapi, Gujarat - 396191",
+  address: "No.2,Plot No.C, Shop, 7/10/1, Surya Hospital Rd, Gunjan Area, GIDC Housing Board Colony, Golden Town, GIDC, Vapi, Gujarat 396195",
   mapCoordinates: {
-    lat: 20.3705,
-    lng: 72.9114
+    lat: 20.372915230470184,
+    lng: 72.92139822841061
   },
   openingHours: "Monday - Saturday: 10:00 AM - 9:00 PM (Sunday Open on Call)",
   services: [
